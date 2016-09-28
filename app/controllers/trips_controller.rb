@@ -59,6 +59,6 @@ class TripsController < ApplicationController
     end
 
     def trip_params
-      params.require(:trip).permit(:name)
+      params.require(:trip).permit(:name, :oneway)
     end
 end

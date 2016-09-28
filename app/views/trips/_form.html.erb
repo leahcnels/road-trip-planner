@@ -13,6 +13,13 @@
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
+    <%= f.label :Oneway %>
+    <%= f.check_box :oneway, {}, "true", "false" do |b| %>
+    <div class="collection-check-box">
+      <%= b.check_box %>
+      <%= b.label %>
+    </div>
+  <%end%>
   </div>
   <div class="actions">
     <%= f.submit %>
