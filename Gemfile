@@ -13,6 +13,8 @@ source 'https://rubygems.org'
   gem 'devise'
   gem 'gmaps4rails'
   gem 'underscore-rails'
+  gem 'geocoder'
+  gem 'rest-client'
 
 group :development, :test do
   gem 'byebug', platform: :mri
