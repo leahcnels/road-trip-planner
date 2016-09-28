@@ -1,10 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @trip.name %>
-</p>
-
+<h1><%= @trip.name %></h1>
 
 <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'></div>
@@ -19,5 +15,6 @@
   });
 </script>
 
+<%= link_to "Add a new location", new_trip_location_path(@trip) %> |
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>

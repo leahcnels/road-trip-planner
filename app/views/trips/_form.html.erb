@@ -2,7 +2,6 @@
   <% if trip.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
-
       <ul>
       <% trip.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -15,7 +14,6 @@
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>

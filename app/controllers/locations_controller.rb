@@ -1,30 +1,21 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
-  # GET /locations
-  # GET /locations.json
   def index
     @trip = Trip.find(params[:trip_id])
   end
 
-  # GET /locations/1
-  # GET /locations/1.json
   def show
-
   end
 
-  # GET /locations/new
   def new
     @trip = Trip.find(params[:trip_id])
     @location = @trip.locations.new
   end
 
-  # GET /locations/1/edit
   def edit
   end
 
-  # POST /locations
-  # POST /locations.json
   def create
     @trip = Trip.find(params[:trip_id])
     @location = @trip.locations.new(location_params)
@@ -35,8 +26,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /locations/1
-  # PATCH/PUT /locations/1.json
   def update
     respond_to do |format|
       if @location.update(location_params)
@@ -49,8 +38,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # DELETE /locations/1
-  # DELETE /locations/1.json
   def destroy
     @location.destroy
     respond_to do |format|
@@ -60,12 +47,10 @@ class LocationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_location
       @location = Location.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
       params.require(:location).permit(:latitude, :longitude, :trip_id, :address)
     end
