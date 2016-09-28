@@ -15,7 +15,8 @@ class LocationsController < ApplicationController
 
   # GET /locations/new
   def new
-    @location = Location.new
+    @trip = Trip.find(params[:trip_id])
+    @location = @trip.locations.new
   end
 
   # GET /locations/1/edit
@@ -25,16 +26,12 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(location_params)
-
-    respond_to do |format|
-      if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
-        format.json { render :show, status: :created, location: @location }
-      else
-        format.html { render :new }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    @trip = Trip.find(params[:trip_id])
+    @location = @trip.locations.new(location_params)
+    if @location.save
+      redirect_to @trip
+    else
+      render :new
     end
   end
 
