@@ -1,24 +1,13 @@
-# README
+For Thursday
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Weather in each city
 
-Things you may want to cover:
+Testing
 
-* Ruby version
+README
 
-* System dependencies
+Customize markers based on weather at time of arrival
 
-* Configuration
+Change order of trip
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Deal with transoceanic travel

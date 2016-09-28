@@ -1,11 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @trip.name %></h1>
-
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-  <div id="directionsPanel" style="float:right;width:30%;height 100%"></div>
+<div class="flex-container">
+  <div class="item">
+    <div id="map" style='width: 800px; height: 400px;'></div>
+    <%= link_to "Add a new location", new_trip_location_path(@trip) %> |
+    <%= link_to 'Edit', edit_trip_path(@trip) %> |
+    <%= link_to 'Delete', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Back', trips_path %>
+  </div>
+  <ul class="item">
+    <h2>Stops</h2>
+    <% @trip.locations.each do |location| %>
+      <li><%= location.address %> | <%= link_to trip_location_path(@trip, location), method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      <% end %> </li>
+    <% end %>
+  </ul>
 </div>
+
+<div id="directionsPanel" style="width: 800px;"></div>
 
 <script type="text/javascript">
   var locations = <%= raw @trip.locations.to_json %>
@@ -62,8 +76,3 @@ calcRoute();
     handler.fitMapToBounds();
   });
 </script>
-
-<%= link_to "Add a new location", new_trip_location_path(@trip) %> |
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Delete', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', trips_path %>
