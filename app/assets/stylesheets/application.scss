@@ -16,11 +16,14 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+body {
+  font-family: 'Racing Sans One', cursive;
+}
 .flex-container {
   display: flex;
   flex-flow: row wrap;
 }
 
 .item {
-  
+
 }
