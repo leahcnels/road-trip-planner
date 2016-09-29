@@ -32,7 +32,7 @@
   var waypoints = [];
   var origin = new google.maps.LatLng(<%= raw @trip.latitude.to_json %>, <%= raw @trip.longitude.to_json %>);
   var oneway = <%= raw @trip.oneway %>
-  if (oneway) {
+  if (oneway && locations) {
     var destination = new google.maps.LatLng(locations[locations.length-1].latitude, locations[locations.length-1].longitude);
     for (i=0; i<locations.length-1; i++) {
       var waypoint = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);

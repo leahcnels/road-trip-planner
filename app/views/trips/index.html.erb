@@ -1,10 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Trips</h1>
-
+<div class="car">
+  <h1>Trips</h1>
   <% @trips.each do |trip| %>
     <h3><%= link_to trip.name, trip_path(trip) %></h3>
   <% end %>
+</div>
 
 <br>
 
