@@ -1,21 +1,46 @@
-# CALEB LOVES FURKOT
+# Rännak (_Road Trip_)
 
-# Entirely By Leah Nelson
+#### By Caleb Stokka, Leah Nelson
 
-### A Rails application to plan road trips
+ ### _A Rails application for planning road trips using the Google Maps API_
 
-For Thursday
+## Setup
 
-Weather in each city
+* Clone repo
+```
+$ git clone https://github.com/leahcnels/road-trip-planner.git
+```
 
-Testing
+* Install necessary packages
+```
+$ bundle
+```
+* Set up database (ActiveRecord)
+```
+$ postgres
+$ rails db:create db:schema:load
+```
+* Visit [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) to get your own API key
+* Set up .env file for API key
+```
+$ touch .env
+$ atom .env
+```
+* Add this line to .env file
+```
+GMAPS_API_KEY=YOUR API KEY
+```
+* Start your rails server
+```
+$ rails s
+```
 
-README
+## Contact
 
-Customize markers based on weather at time of arrival
+leahcnels@gmail.com / caleb.stokka@gmail.com
 
-Change order of trip
+## License
 
-Deal with transoceanic travel
+This software is licensed under the MIT License
 
-Styling, fonts
+Copyright &copy; 2016 Leah Nelson, Caleb Stokka

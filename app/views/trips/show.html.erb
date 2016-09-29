@@ -4,18 +4,24 @@
 <div class="flex-container">
   <div class="item">
     <div id="map" style='width: 800px; height: 400px;'></div>
-    <%= link_to "Add a new location", new_trip_location_path(@trip), id: "new-location", remote: true %> |
+    <h4><%= link_to "Add a new location", new_trip_location_path(@trip), id: "new-location", remote: true %> |
     <%= link_to 'Edit', edit_trip_path(@trip) %> |
     <%= link_to 'Delete', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure?' } %> |
-    <%= link_to 'Back', trips_path %>
+    <%= link_to 'Back', trips_path %></h4>
   </div>
   <ul class="item">
-    <h2>Stops</h2>
+    <h2>Stops:</h2>
+    <li><%= @trip.origin %></li>
     <% @trip.locations.each do |location| %>
       <li><%= location.address %> | <%= link_to trip_location_path(@trip, location), method: :delete, data: { confirm: 'Are you sure?' } do %>
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-      <% end %> </li>
+      <% end %></li>
     <% end %>
+    <% if !@trip.oneway %>
+      <li><%= @trip.origin %></li>
+    <% end %>
+    <h2>Totals:</h2>
+    <p id="total-miles"></p>
   </ul>
 </div>
 
@@ -24,11 +30,11 @@
 <script type="text/javascript">
   var locations = <%= raw @trip.locations.to_json %>
   var waypoints = [];
-  var origin = new google.maps.LatLng(locations[0].latitude, locations[0].longitude);
+  var origin = new google.maps.LatLng(<%= raw @trip.latitude.to_json %>, <%= raw @trip.longitude.to_json %>);
   var oneway = <%= raw @trip.oneway %>
   if (oneway) {
     var destination = new google.maps.LatLng(locations[locations.length-1].latitude, locations[locations.length-1].longitude);
-    for (i=1; i<locations.length-1; i++) {
+    for (i=0; i<locations.length-1; i++) {
       var waypoint = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);
       waypoints.push({
           location: waypoint,
@@ -36,8 +42,8 @@
         });
     }
   } else {
-    var destination = new google.maps.LatLng(locations[0].latitude, locations[0].longitude);
-    for (i=1; i<locations.length; i++) {
+    var destination = origin;
+    for (i=0; i<locations.length; i++) {
       var waypoint = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);
       waypoints.push({
           location: waypoint,
@@ -57,9 +63,18 @@
         waypoints: waypoints,
         optimizeWaypoints: true
     };
+
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
+        var totalMiles = 0;
+        var totalTime = 0;
+        response.routes[0].legs.forEach(function(leg) {
+          totalMiles += leg.distance.value
+          totalTime += leg.duration.value
+        })
+        $("#total-miles").append("<h4>Approximately " + parseInt(totalMiles / 1609.344) + " miles</h4>");
+        $("#total-miles").append("<h4>Approximately " + parseInt(totalTime / 3600) + " hours</h4>");
         directionsDisplay.setPanel(document.getElementById('directionsPanel'));
       } else {
         $('#directionsPanel').append("Sorry! No route was found.");
