@@ -13,7 +13,10 @@ class LocationsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @location = @trip.locations.new(location_params)
     if @location.save
-      redirect_to @trip
+      respond_to do |format|
+        format.html { redirect_to @trip }
+        format.json
+      end
     else
       render :new
     end

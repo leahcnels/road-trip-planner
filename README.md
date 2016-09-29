@@ -1,3 +1,9 @@
+# CALEB LOVES FURKOT
+
+# Entirely By Leah Nelson
+
+### A Rails application to plan road trips
+
 For Thursday
 
 Weather in each city

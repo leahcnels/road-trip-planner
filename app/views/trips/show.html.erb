@@ -4,7 +4,7 @@
 <div class="flex-container">
   <div class="item">
     <div id="map" style='width: 800px; height: 400px;'></div>
-    <%= link_to "Add a new location", new_trip_location_path(@trip) %> |
+    <%= link_to "Add a new location", new_trip_location_path(@trip), id: "new-location", remote: true %> |
     <%= link_to 'Edit', edit_trip_path(@trip) %> |
     <%= link_to 'Delete', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure?' } %> |
     <%= link_to 'Back', trips_path %>
@@ -50,11 +50,10 @@
   var directionsService = new google.maps.DirectionsService();
 
   function calcRoute() {
-
     var request = {
-        origin:      origin,
+        origin: origin,
         destination: destination,
-        travelMode:  google.maps.TravelMode.DRIVING,
+        travelMode: google.maps.TravelMode.DRIVING,
         waypoints: waypoints,
         optimizeWaypoints: true
     };
@@ -65,9 +64,8 @@
       }
     });
   }
+  calcRoute();
 
-
-calcRoute();
   handler = Gmaps.build('Google', { markers: { clusterer: undefined  } });
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers(<%= raw @hash.to_json %>);
