@@ -61,6 +61,8 @@
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
         directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+      } else {
+        $('#directionsPanel').append("Sorry! No route was found.");
       }
     });
   }
